@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+    <form
+      action="/campgrounds/<%= campground._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -10,8 +15,10 @@
           type="text"
           id="title"
           name="campground[title]"
+          required
           value="<%= campground.title %>"
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="location">Location</label>
@@ -20,8 +27,10 @@
           type="text"
           id="location"
           name="campground[location]"
+          required
           value="<%= campground.location %>"
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image Url</label>
@@ -30,8 +39,10 @@
           type="text"
           id="image"
           name="campground[image]"
+          required
           value="<%= campground.image %>"
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price</label>
@@ -45,8 +56,10 @@
             placeholder="0.00"
             aria-label="price"
             aria-describedby="price-label"
+            required
             value="<%= campground.price %>"
           />
+          <div class="valid-feedback">Looks good!</div>
         </div>
       </div>
 
@@ -56,10 +69,12 @@
           class="form-control"
           id="description"
           name="campground[description]"
+          required
           rows="3"
         >
 <%= campground.description %></textarea
         >
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Campground</button>
