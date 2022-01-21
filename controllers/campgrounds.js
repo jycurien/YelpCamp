@@ -13,7 +13,7 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.createCampground = async (req, res, next) => {
   const campground = new Campground({
     ...req.body.campground,
-    image: req.file.path.slice(6),
+    images: req.files.map((f) => f.path.slice(6)),
   })
   campground.author = req.user._id
   await campground.save()
@@ -50,14 +50,16 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
-  let image = campground.image
-  if (req.file) {
-    fs.unlink(`public${image}`, (err) => console.log(err))
-    image = req.file.path.slice(6)
+  let images = campground.images
+  if (req.files.length) {
+    for (let image of images) {
+      fs.unlink(`public${image}`, (err) => console.log(err))
+    }
+    images = req.files.map((f) => f.path.slice(6))
   }
   await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
-    image,
+    images,
   })
   req.flash('success', 'Successfuly updated campground!')
   res.redirect(`/campgrounds/${id}`)

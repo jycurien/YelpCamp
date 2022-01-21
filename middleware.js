@@ -22,7 +22,7 @@ module.exports.validateCampground = (req, res, next) => {
 }
 
 module.exports.validateImageFile = (req, res, next) => {
-  if (!req.file) {
+  if (!req.files.length) {
     throw new ExpressError(
       'Please provide an image for the new campground',
       400
