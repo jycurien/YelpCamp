@@ -12,6 +12,9 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.validateCampground = (req, res, next) => {
+  if (!req.file) {
+    throw new ExpressError('Please provide an image for the new camproung', 400)
+  }
   const { error } = campgroundSchema.validate(req.body)
   if (error) {
     const msg = error.details.map((el) => el.message).join(',')
