@@ -12,13 +12,21 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.validateCampground = (req, res, next) => {
-  if (!req.file) {
-    throw new ExpressError('Please provide an image for the new camproung', 400)
-  }
   const { error } = campgroundSchema.validate(req.body)
   if (error) {
     const msg = error.details.map((el) => el.message).join(',')
     throw new ExpressError(msg, 400)
+  } else {
+    next()
+  }
+}
+
+module.exports.validateImageFile = (req, res, next) => {
+  if (!req.file) {
+    throw new ExpressError(
+      'Please provide an image for the new campground',
+      400
+    )
   } else {
     next()
   }

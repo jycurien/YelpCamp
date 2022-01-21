@@ -50,10 +50,14 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
-  fs.unlink(`public${campground.image}`, (err) => console.log(err))
+  let image = campground.image
+  if (req.file) {
+    fs.unlink(`public${image}`, (err) => console.log(err))
+    image = req.file.path.slice(6)
+  }
   await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
-    image: req.file.path.slice(6),
+    image,
   })
   req.flash('success', 'Successfuly updated campground!')
   res.redirect(`/campgrounds/${id}`)
