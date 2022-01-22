@@ -5,6 +5,7 @@
     <div class="card mb-3">
       <div id="map" style="width: 400px; height: 300px"></div>
       <div class="card-img-top">
+        <% if (campground.images.length) { %>
         <div
           id="campgroundCarousel"
           class="carousel slide"
@@ -42,6 +43,13 @@
           </button>
           <% } %>
         </div>
+        <% } else { %>
+        <img
+          class="img-fluid rounded-start"
+          src="https://via.placeholder.com/400x250"
+          alt="<%= campground.title %>"
+        />
+        <% } %>
       </div>
       <div class="card-body">
         <h1 class="card-title h5"><%= campground.title %></h1>
