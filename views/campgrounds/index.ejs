@@ -5,19 +5,21 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
-      <% if (campground.images.length) {%>
-      <img
-        class="img-fluid rounded-start"
-        src="<%= campground.images[0] %>"
-        alt="<%= campground.title %>"
-      />
-      <% } else { %>
-      <img
-        class="img-fluid rounded-start"
-        src="https://via.placeholder.com/400x250"
-        alt="<%= campground.title %>"
-      />
-      <% } %>
+      <div class="rounded-start h-100">
+        <% if (campground.images.length) {%>
+        <img
+          class="img-fluid rounded-start"
+          src="<%= campground.images[0] %>"
+          alt="<%= campground.title %>"
+        />
+        <% } else { %>
+        <img
+          class="img-fluid rounded-start"
+          src="https://via.placeholder.com/400x250"
+          alt="<%= campground.title %>"
+        />
+        <% } %>
+      </div>
     </div>
     <div class="col-md-8">
       <div class="card-body">
